@@ -25,7 +25,7 @@ export class App extends Component {
     this.setState({ contacts: parsedContacts });
   }
 
-  //Синхронізація з локальним сховищем при оновленн масиву даних
+  // Синхронізація з локальним сховищем при оновленні масиву даних
 
   componentDidUpdate(_, prevState) {
     if (prevState.contacts !== this.state.contacts) {
