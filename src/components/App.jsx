@@ -18,6 +18,23 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const stringifiedContacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(stringifiedContacts) ?? [];
+
+    this.setState({ contacts: parsedContacts });
+  }
+
+  //Синхронізація з локальним сховищем при оновленн масиву даних
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      const stringifiedContacts = JSON.stringify(this.state.contacts);
+
+      localStorage.setItem('contacts', stringifiedContacts);
+    }
+  }
+
   // Форма віддає свій state через props onSubmitForm в компоненті, щоб при сабміті віддати в апп тільки свої дані.
 
   addContactOnSubmit = inputContact => {
